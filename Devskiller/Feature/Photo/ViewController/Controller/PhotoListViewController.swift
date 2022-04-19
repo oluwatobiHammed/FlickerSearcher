@@ -35,6 +35,25 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             let repo = PhotoRepo(route: route, localStorage: storage)
             photoViewModel = PhotoViewModel(photoRepo: repo, delegate: self)
         }
+        if isNewUser()  {
+            photoViewModel?.searchPhoto(query: "kitten", pageNo: "\(currentPage)", data: { [weak self] in
+                PersistenceService.context.delete(self!.photoList)
+                self?.requestData = $0.searchdata
+                self?.requestPhoto = $0.SearchResponse
+                $0.searchdata.forEach {
+                    self?.photoViewModel?.imageDownload(urlString: $0.flickrImageURL() ?? "", data: {  [weak self] in
+                        self?.photoViewModel?.savePhotoList(data: $0)
+                    })
+                   
+                }
+                
+                self?.activityIndicator.stopAnimating()
+                self?.activityIndicator.removeFromSuperview()
+                self?.collectionView.reloadData()
+                
+            })
+        }
+        print(isNewUser())
     }
     
     func errorHandler(error: String) {
@@ -46,6 +65,9 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         
     }
     
+    private func isNewUser() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isNewUser")
+    }
     private func selectedIndex(urlString: String, imageData:  @escaping (Data) -> Void) {
         photoViewModel?.imageDownload(urlString: urlString, data: { [weak self] in
             self?.photoViewModel?.savePhotoList(data: $0)

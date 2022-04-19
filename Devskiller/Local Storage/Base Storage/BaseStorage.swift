@@ -20,6 +20,7 @@ class BaseStorage: BaseStorageProtocol {
     //Generic Load data method for any data type
     func savePhotoList (data: Data) throws {
         self.photoList.data = data
+        try PersistenceService.saveContext()
     }
     //Generic delete method for any data type
     func loadPhotoDetails() throws -> Data? {
