@@ -37,12 +37,6 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        let indexPath = IndexPath(row: requestData.count, section: 0)
-//        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
-//        collectionView.reloadData()
-    }
     func errorHandler(error: String) {
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
@@ -52,12 +46,13 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         
     }
     
-   private func selectedIndex(urlString: String, imageData:  @escaping (Data) -> Void) {
+    private func selectedIndex(urlString: String, imageData:  @escaping (Data) -> Void) {
         photoViewModel?.imageDownload(urlString: urlString, data: { [weak self] in
             self?.photoViewModel?.savePhotoList(data: $0)
             imageData($0)
         })
     }
+    
 }
 
 
@@ -96,15 +91,16 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-       
+        
         if requestPhoto!.page <  requestPhoto!.pages && indexPath.row == requestData.count - 1 {
             currentPage += 1
             photoViewModel?.searchPhoto(query: query, pageNo: "\(currentPage)", data: { [weak self] in
-                self?.requestData = $0.searchdata
+                self?.requestData += $0.searchdata
+                collectionView.reloadData()
                 self?.activityIndicator.stopAnimating()
                 self?.activityIndicator.removeFromSuperview()
             })
-            }
+        }
     }
     
     
@@ -126,9 +122,9 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
         layout.minimumInteritemSpacing = 0
         self.collectionView?.showsHorizontalScrollIndicator = false
     }
-
-   
-
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
@@ -136,15 +132,15 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
         let heightPerItem = widthPerItem + 21
         return CGSize(width: widthPerItem, height: heightPerItem)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
