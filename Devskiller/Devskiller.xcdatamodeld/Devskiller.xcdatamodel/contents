@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PhotoDetail" representedClassName="PhotoDetail" syncable="YES">
+        <attribute name="photodata" optional="YES" attributeType="Binary"/>
+        <relationship name="parentPhotolist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoList" inverseName="photos" inverseEntity="PhotoList"/>
+    </entity>
+    <entity name="PhotoList" representedClassName="PhotoList" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhotoDetail" inverseName="parentPhotolist" inverseEntity="PhotoDetail"/>
+    </entity>
+    <elements>
+        <element name="PhotoList" positionX="-266.4060668945312" positionY="-11.66378784179688" width="128" height="73"/>
+        <element name="PhotoDetail" positionX="-63" positionY="-9" width="266.7965087890625" height="73"/>
+    </elements>
+</model>
