@@ -186,13 +186,15 @@ extension PhotoListViewController: UITextFieldDelegate {
         query = text
         
         photoViewModel?.searchPhoto(query: text, pageNo: "\(currentPage)", data: { [weak self] in
+            print("DId not reach")
             PersistenceService.context.delete(self!.photoList)
             self?.requestData = $0.searchdata
             self?.requestPhoto = $0.SearchResponse
             self?.activityIndicator.stopAnimating()
             self?.activityIndicator.removeFromSuperview()
             self?.collectionView.reloadData()
-            
+            self?.collectionView.layoutIfNeeded()
+            self?.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         })
         
         textField.text = nil
