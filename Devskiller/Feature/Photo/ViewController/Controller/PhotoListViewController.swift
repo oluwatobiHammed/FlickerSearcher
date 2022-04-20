@@ -19,7 +19,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     private var photoViewModel: PhotoViewModelProtocol?
     private let itemsPerRow: CGFloat = 2
     private var requestData: [SearchPhotoViewModel]?
-    private var requestPhotoList: [PhotoList] = []
+    private var requestPhotoList: [Data] = []
     private var requestPhoto: PhotosResponse?
     private var currentPage: Int = 1
     private let photoList = PhotoList(context: PersistenceService.context)
@@ -38,6 +38,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         }
         
         handleSearch(query: query)
+        
         
     }
     
@@ -60,6 +61,17 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             self?.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             
         })
+        guard let getPhotoList = photoViewModel?.loadPhotoList() else {
+            return
+        }
+        let dataList: [Data] = getPhotoList.compactMap({
+            guard let data = $0.data else {
+                return nil
+            }
+            return data
+        })
+        requestPhotoList = dataList
+        print(requestPhotoList)
     }
     func errorHandler(error: String) {
         activityIndicator.stopAnimating()
@@ -73,7 +85,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     private func isNewUser() -> Bool {
         return UserDefaults.standard.bool(forKey: "isNewUser")
     }
-    private func selectedIndex(urlString: String, imageData:  @escaping (Data) -> Void) {
+    private func selectedIndex(urlString: String, imageData:  @escaping (Data?) -> Void) {
         photoViewModel?.imageDownload(urlString: urlString, data: { [weak self] in
             self?.photoViewModel?.savePhotoList(data: $0)
             imageData($0)
@@ -98,7 +110,7 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
             cell.addSubview(self.activityIndicator)
             self.activityIndicator.frame = cell.bounds
             self.activityIndicator.startAnimating()
-            cell.photoImageView.load(data: $0)
+            cell.photoImageView.load(data: $0 ?? self.requestPhotoList[indexPath.row])
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 0.5
         }
@@ -111,7 +123,10 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
             return
         }
         selectedIndex(urlString: urlString) { [weak self] in
-            self?.photoViewModel?.savePhotoDetails(data: $0)
+            guard let self = self  else {
+                return
+            }
+            self.photoViewModel?.savePhotoDetails(data: $0 ?? self.requestPhotoList[indexPath.row])
             let _ = StoryBoardsID.boardMain.requestNavigation(to: ViewControllerID.ImageViewController, from: self, requestData: $0)
         }
         collectionView.deselectItem(at: indexPath, animated: true)
