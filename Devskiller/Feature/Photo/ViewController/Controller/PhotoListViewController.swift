@@ -24,7 +24,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     private let photoList = PhotoList(context: PersistenceService.context)
     private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     
-    private var query: String = ""
+    private var query: String =  "kitten"
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -36,7 +36,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             photoViewModel = PhotoViewModel(photoRepo: repo, delegate: self)
         }
         if isNewUser()  {
-            photoViewModel?.searchPhoto(query: "kitten", pageNo: "\(currentPage)", data: { [weak self] in
+            photoViewModel?.searchPhoto(query:query, pageNo: "\(currentPage)", data: { [weak self] in
                 PersistenceService.context.delete(self!.photoList)
                 self?.requestData = $0.searchdata
                 self?.requestPhoto = $0.SearchResponse
