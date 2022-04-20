@@ -18,7 +18,8 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     let activityIndicator = UIActivityIndicatorView(style: .medium)
     private var photoViewModel: PhotoViewModelProtocol?
     private let itemsPerRow: CGFloat = 2
-    private var requestData: [SearchPhotoViewModel] = []
+    private var requestData: [SearchPhotoViewModel]?
+    private var requestPhotoList: [PhotoList] = []
     private var requestPhoto: PhotosResponse?
     private var currentPage: Int = 1
     private let photoList = PhotoList(context: PersistenceService.context)
@@ -35,27 +36,31 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             let repo = PhotoRepo(route: route, localStorage: storage)
             photoViewModel = PhotoViewModel(photoRepo: repo, delegate: self)
         }
-        if isNewUser()  {
-            photoViewModel?.searchPhoto(query:query, pageNo: "\(currentPage)", data: { [weak self] in
-                PersistenceService.context.delete(self!.photoList)
-                self?.requestData = $0.searchdata
-                self?.requestPhoto = $0.SearchResponse
-                $0.searchdata.forEach {
-                    self?.photoViewModel?.imageDownload(urlString: $0.flickrImageURL() ?? "", data: {  [weak self] in
-                        self?.photoViewModel?.savePhotoList(data: $0)
-                    })
-                   
-                }
-                
-                self?.activityIndicator.stopAnimating()
-                self?.activityIndicator.removeFromSuperview()
-                self?.collectionView.reloadData()
-                
-            })
-        }
-        print(isNewUser())
+        
+        handleSearch(query: query)
+        
     }
     
+    private func handleSearch(query: String) {
+        photoViewModel?.searchPhoto(query:query, pageNo: "\(currentPage)", data: { [weak self] in
+            PersistenceService.context.delete(self!.photoList)
+            self?.requestData = $0.searchdata
+            self?.requestPhoto = $0.SearchResponse
+            $0.searchdata.forEach {
+                self?.photoViewModel?.imageDownload(urlString: $0.flickrImageURL() ?? "", data: {  [weak self] in
+                    self?.photoViewModel?.savePhotoList(data: $0)
+                })
+                
+            }
+            
+            self?.activityIndicator.stopAnimating()
+            self?.activityIndicator.removeFromSuperview()
+            self?.collectionView.reloadData()
+            self?.collectionView.layoutIfNeeded()
+            self?.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            
+        })
+    }
     func errorHandler(error: String) {
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
@@ -81,7 +86,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
 @available(iOS 15.0, *)
 extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return requestData.count
+        return requestData?.count ?? requestPhotoList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,7 +94,7 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
         guard let cell = cell else {
             return UICollectionViewCell()
         }
-        selectedIndex(urlString: requestData[indexPath.row].flickrImageURL() ?? "") {
+        selectedIndex(urlString: requestData?[indexPath.row].flickrImageURL() ?? "") {
             cell.addSubview(self.activityIndicator)
             self.activityIndicator.frame = cell.bounds
             self.activityIndicator.startAnimating()
@@ -102,7 +107,7 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let urlString = requestData[indexPath.row].flickrImageURL("b") else {
+        guard let urlString = requestData?[indexPath.row].flickrImageURL("b") else {
             return
         }
         selectedIndex(urlString: urlString) { [weak self] in
@@ -113,11 +118,13 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        if requestPhoto!.page <  requestPhoto!.pages && indexPath.row == requestData.count - 1 {
+        guard let reqphoto = requestPhoto, let requData = requestData else {
+            return
+        }
+        if reqphoto.page <  reqphoto.pages && indexPath.row == requData.count - 1 {
             currentPage += 1
             photoViewModel?.searchPhoto(query: query, pageNo: "\(currentPage)", data: { [weak self] in
-                self?.requestData += $0.searchdata
+                self?.requestData! += $0.searchdata
                 collectionView.reloadData()
                 self?.activityIndicator.stopAnimating()
                 self?.activityIndicator.removeFromSuperview()
@@ -177,26 +184,13 @@ extension PhotoListViewController: UITextFieldDelegate {
         guard let text = textField.text,
               !text.isEmpty
         else { return true }
-        
         // 1
-        
         textField.addSubview(activityIndicator)
         activityIndicator.frame = textField.bounds
         activityIndicator.startAnimating()
         query = text
-        
-        photoViewModel?.searchPhoto(query: text, pageNo: "\(currentPage)", data: { [weak self] in
-            print("DId not reach")
-            PersistenceService.context.delete(self!.photoList)
-            self?.requestData = $0.searchdata
-            self?.requestPhoto = $0.SearchResponse
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.removeFromSuperview()
-            self?.collectionView.reloadData()
-            self?.collectionView.layoutIfNeeded()
-            self?.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-        })
-        
+        PersistenceService.context.delete(self.photoList)
+        handleSearch(query: query)
         textField.text = nil
         textField.resignFirstResponder()
         return true
