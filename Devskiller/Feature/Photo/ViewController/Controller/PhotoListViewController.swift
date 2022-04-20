@@ -22,6 +22,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     private var requestPhotoList: [Data] = []
     private var requestPhoto: PhotosResponse?
     private var currentPage: Int = 1
+    private var isSearching: Bool = false
     private let photoList = PhotoList(context: PersistenceService.context)
     private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     
@@ -76,7 +77,12 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     func errorHandler(error: String) {
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
-        AlertView.instance.showAlert(title: "Download Error", message: error, alertType: .failure)
+        if requestPhotoList.isEmpty || isSearching {
+            AlertView.instance.showAlert(title: "Download Error", message: error, alertType: .failure)
+        }
+            
+        
+        
         
         
         
@@ -138,6 +144,7 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
         }
         if reqphoto.page <  reqphoto.pages && indexPath.row == requData.count - 1 {
             currentPage += 1
+            self.isSearching = true
             photoViewModel?.searchPhoto(query: query, pageNo: "\(currentPage)", data: { [weak self] in
                 self?.requestData! += $0.searchdata
                 collectionView.reloadData()
@@ -199,6 +206,7 @@ extension PhotoListViewController: UITextFieldDelegate {
         guard let text = textField.text,
               !text.isEmpty
         else { return true }
+        isSearching = true
         // 1
         textField.addSubview(activityIndicator)
         activityIndicator.frame = textField.bounds
