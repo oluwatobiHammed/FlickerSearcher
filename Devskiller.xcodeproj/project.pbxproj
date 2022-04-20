@@ -11,6 +11,7 @@
 		312C9179280DFFF900C2CAF0 /* PhotoList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9175280DFFF900C2CAF0 /* PhotoList+CoreDataProperties.swift */; };
 		312C917A280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9176280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift */; };
 		312C917B280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9177280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift */; };
+		312C917E28103C9400C2CAF0 /* DynamicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C917D28103C9400C2CAF0 /* DynamicValue.swift */; };
 		318FB695280818CE00DD8687 /* ServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB693280818CE00DD8687 /* ServicesProtocol.swift */; };
 		318FB696280818CE00DD8687 /* BaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB694280818CE00DD8687 /* BaseServices.swift */; };
 		318FB699280818FD00DD8687 /* Decodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB698280818FD00DD8687 /* Decodable+Extension.swift */; };
@@ -74,6 +75,7 @@
 		312C9175280DFFF900C2CAF0 /* PhotoList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		312C9176280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
 		312C9177280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		312C917D28103C9400C2CAF0 /* DynamicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicValue.swift; sourceTree = "<group>"; };
 		318FB693280818CE00DD8687 /* ServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesProtocol.swift; sourceTree = "<group>"; };
 		318FB694280818CE00DD8687 /* BaseServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseServices.swift; sourceTree = "<group>"; };
 		318FB698280818FD00DD8687 /* Decodable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+Extension.swift"; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				318FB6BF2808D34000DD8687 /* PhotoViewModelProtocol.swift */,
 				318FB6C12808D35500DD8687 /* PhotoViewModel.swift */,
 				318FB6F0280C429500DD8687 /* SearchPhotoViewModel.swift */,
+				312C917D28103C9400C2CAF0 /* DynamicValue.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				318FB6B52808CE4A00DD8687 /* Size.swift in Sources */,
 				318FB699280818FD00DD8687 /* Decodable+Extension.swift in Sources */,
 				48D69BCB2514ECC700DD96AA /* PhotoListViewController.swift in Sources */,
+				312C917E28103C9400C2CAF0 /* DynamicValue.swift in Sources */,
 				318FB69E2808194B00DD8687 /* GlobalControllerStoryID.swift in Sources */,
 				318FB6C42808D87300DD8687 /* PhotoViewDelegateProtocol.swift in Sources */,
 				318FB6A828082D7C00DD8687 /* Photo.swift in Sources */,

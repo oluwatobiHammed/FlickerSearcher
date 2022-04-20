@@ -92,7 +92,8 @@ class PhotoViewModel: PhotoViewModelProtocol {
     
     func loadPhotoDetails() -> Data? {
         do{
-           return try photoRepo?.loadPhotoDetails()
+            let data =  try photoRepo?.loadPhotoDetails()
+            return data
         }catch {
             delegate?.errorHandler(error: error.localizedDescription)
         }

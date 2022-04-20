@@ -66,13 +66,13 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             return
         }
         let dataList: [Data] = getPhotoList.compactMap({
+            self.collectionView.reloadData()
             guard let data = $0.data else {
                 return nil
             }
             return data
         })
         requestPhotoList = dataList
-        print(requestPhotoList)
     }
     func errorHandler(error: String) {
         activityIndicator.stopAnimating()
@@ -80,7 +80,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         if requestPhotoList.isEmpty || isSearching {
             AlertView.instance.showAlert(title: "Download Error", message: error, alertType: .failure)
         }
-            
+        
         
         
         
@@ -88,12 +88,10 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         
     }
     
-    private func isNewUser() -> Bool {
-        return UserDefaults.standard.bool(forKey: "isNewUser")
-    }
+    
     private func selectedIndex(urlString: String, imageData:  @escaping (Data?) -> Void) {
         photoViewModel?.imageDownload(urlString: urlString, data: { [weak self] in
-            self?.photoViewModel?.savePhotoList(data: $0)
+            self?.photoViewModel?.savePhotoDetails(data: $0)
             imageData($0)
         })
     }
@@ -125,16 +123,22 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let urlString = requestData?[indexPath.row].flickrImageURL("b") else {
-            return
-        }
-        selectedIndex(urlString: urlString) { [weak self] in
-            guard let self = self  else {
+        if let urlString = requestData?[indexPath.row].flickrImageURL("b")  {
+            selectedIndex(urlString: urlString) { [weak self] in
+                guard let self = self  else {
+                    return
+                }
+                
+                let _ = StoryBoardsID.boardMain.requestNavigation(to: ViewControllerID.ImageViewController, from: self, requestData: $0)
+            }
+        }else {
+            guard let data: Data = self.photoViewModel?.loadPhotoDetails() else {
                 return
             }
-            self.photoViewModel?.savePhotoDetails(data: $0 ?? self.requestPhotoList[indexPath.row])
-            let _ = StoryBoardsID.boardMain.requestNavigation(to: ViewControllerID.ImageViewController, from: self, requestData: $0)
+            print(data)
+            let _ = StoryBoardsID.boardMain.requestNavigation(to: ViewControllerID.ImageViewController, from: self, requestData: data)
         }
+        
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
