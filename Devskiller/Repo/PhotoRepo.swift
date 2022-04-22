@@ -15,11 +15,11 @@ class PhotoRepo: PhotoRepoProtocol {
     
    private let route: PhotoRouteProtocol?
     private let localStorage: BaseStorageProtocol?
+   
     init (route: PhotoRouteProtocol, localStorage: BaseStorageProtocol) {
         self.route = route
         self.localStorage = localStorage
     }
-    
     func getShearchPhotos(query: String, page: String) async throws -> ApiResponse<PhotoResponse>? {
       return try await  route?.getShearchPhotos(query: query, page: page)
     }

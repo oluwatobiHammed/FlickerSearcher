@@ -23,18 +23,16 @@ enum HttpMethod: String {
 
 @available(iOS 15.0, *)
 class BaseServices: ServicesProtocol {
-  
-    
     private lazy var session: URLSession = {
         // Set In-Memory Cache to 512 MB
         URLCache.shared.memoryCapacity = 512 * 1024 * 1024
-
+        
         // Create URL Session Configuration
         let configuration = URLSessionConfiguration.default
-
+        
         // Define Request Cache Policy
         configuration.requestCachePolicy = .returnCacheDataElseLoad
-
+        
         return URLSession(configuration: configuration)
     }()
     
@@ -50,9 +48,6 @@ class BaseServices: ServicesProtocol {
         try self.getJsonString(withKey: "data", forValue: responseObject)
         //map the result of `jsonString` above to the `responseType`
         return try? responseType.mapTo(jsonString: jsonString)
-        
-         
-        
     }
     
     func imageDownload(_ urlString: String, method: HttpMethod) async throws -> Data? {

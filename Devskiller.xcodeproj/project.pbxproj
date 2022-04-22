@@ -12,6 +12,10 @@
 		312C917A280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9176280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift */; };
 		312C917B280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9177280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift */; };
 		312C917E28103C9400C2CAF0 /* DynamicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C917D28103C9400C2CAF0 /* DynamicValue.swift */; };
+		312C918028103E4400C2CAF0 /* PhotosVC+SearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C917F28103E4400C2CAF0 /* PhotosVC+SearchBarDelegate.swift */; };
+		312C91822810411800C2CAF0 /* PhotosViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C91812810411800C2CAF0 /* PhotosViewDataSource.swift */; };
+		312C91852810425600C2CAF0 /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C91842810425600C2CAF0 /* PhotosModel.swift */; };
+		312C91882811CC2100C2CAF0 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C91872811CC2100C2CAF0 /* ActivityIndicator.swift */; };
 		318FB695280818CE00DD8687 /* ServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB693280818CE00DD8687 /* ServicesProtocol.swift */; };
 		318FB696280818CE00DD8687 /* BaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB694280818CE00DD8687 /* BaseServices.swift */; };
 		318FB699280818FD00DD8687 /* Decodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB698280818FD00DD8687 /* Decodable+Extension.swift */; };
@@ -76,6 +80,10 @@
 		312C9176280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
 		312C9177280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		312C917D28103C9400C2CAF0 /* DynamicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicValue.swift; sourceTree = "<group>"; };
+		312C917F28103E4400C2CAF0 /* PhotosVC+SearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+SearchBarDelegate.swift"; sourceTree = "<group>"; };
+		312C91812810411800C2CAF0 /* PhotosViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewDataSource.swift; sourceTree = "<group>"; };
+		312C91842810425600C2CAF0 /* PhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModel.swift; sourceTree = "<group>"; };
+		312C91872811CC2100C2CAF0 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		318FB693280818CE00DD8687 /* ServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesProtocol.swift; sourceTree = "<group>"; };
 		318FB694280818CE00DD8687 /* BaseServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseServices.swift; sourceTree = "<group>"; };
 		318FB698280818FD00DD8687 /* Decodable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+Extension.swift"; sourceTree = "<group>"; };
@@ -157,6 +165,23 @@
 				312C9177280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		312C91832810423F00C2CAF0 /* PhotosView */ = {
+			isa = PBXGroup;
+			children = (
+				312C91812810411800C2CAF0 /* PhotosViewDataSource.swift */,
+				312C91842810425600C2CAF0 /* PhotosModel.swift */,
+			);
+			path = PhotosView;
+			sourceTree = "<group>";
+		};
+		312C91862811CC0800C2CAF0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				312C91872811CC2100C2CAF0 /* ActivityIndicator.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		318FB692280818CE00DD8687 /* Services */ = {
@@ -253,6 +278,7 @@
 		318FB6BE2808D32400DD8687 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				312C91832810423F00C2CAF0 /* PhotosView */,
 				318FB6BF2808D34000DD8687 /* PhotoViewModelProtocol.swift */,
 				318FB6C12808D35500DD8687 /* PhotoViewModel.swift */,
 				318FB6F0280C429500DD8687 /* SearchPhotoViewModel.swift */,
@@ -322,6 +348,7 @@
 				318FB6D1280B330800DD8687 /* BaseViewController.swift */,
 				318FB6CF280B326800DD8687 /* ImageViewController.swift */,
 				48D69BCA2514ECC700DD96AA /* PhotoListViewController.swift */,
+				312C917F28103E4400C2CAF0 /* PhotosVC+SearchBarDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -349,6 +376,7 @@
 		48D69BC52514ECC700DD96AA /* Devskiller */ = {
 			isa = PBXGroup;
 			children = (
+				312C91862811CC0800C2CAF0 /* Helper */,
 				318FB6C9280AB2F900DD8687 /* View */,
 				318FB6BB2808D2F700DD8687 /* Feature */,
 				318FB6B62808D17900DD8687 /* Repo */,
@@ -520,9 +548,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				312C918028103E4400C2CAF0 /* PhotosVC+SearchBarDelegate.swift in Sources */,
 				312C9178280DFFF900C2CAF0 /* PhotoList+CoreDataClass.swift in Sources */,
 				318FB6DE280B3A5700DD8687 /* CategoryLocalStorageProtocol.swift in Sources */,
 				318FB6BA2808D20C00DD8687 /* PhotoRepo.swift in Sources */,
+				312C91882811CC2100C2CAF0 /* ActivityIndicator.swift in Sources */,
+				312C91852810425600C2CAF0 /* PhotosModel.swift in Sources */,
 				48D69BD12514ECC700DD96AA /* Devskiller.xcdatamodeld in Sources */,
 				318FB6B3280833C900DD8687 /* PhotoRoute.swift in Sources */,
 				318FB6A02808199400DD8687 /* UIViewControll+Extension.swift in Sources */,
@@ -535,6 +566,7 @@
 				318FB6B82808D1A200DD8687 /* PhotoRepoProtocol.swift in Sources */,
 				318FB6B1280831F200DD8687 /* ResponsePayload.swift in Sources */,
 				318FB6B52808CE4A00DD8687 /* Size.swift in Sources */,
+				312C91822810411800C2CAF0 /* PhotosViewDataSource.swift in Sources */,
 				318FB699280818FD00DD8687 /* Decodable+Extension.swift in Sources */,
 				48D69BCB2514ECC700DD96AA /* PhotoListViewController.swift in Sources */,
 				312C917E28103C9400C2CAF0 /* DynamicValue.swift in Sources */,

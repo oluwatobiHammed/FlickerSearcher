@@ -29,10 +29,6 @@ struct SearchPhotoViewModel {
     func flickrImageURL(_ size: String = "q") -> String? {
       return "https://live.staticflickr.com/\(server)/\(photoID)_\(secret)_\(size).jpg"
     }
-    
-    func flickrLargeImageURL(_ size: String = "") -> String? {
-      return "https://live.staticflickr.com/\(server)/\(photoID)_\(secret)_\(size).jpg"
-    }
 }
 
 
