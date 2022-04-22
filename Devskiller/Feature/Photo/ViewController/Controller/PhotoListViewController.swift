@@ -25,11 +25,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     }()
     var activityIndicator: ActivityIndicator? = ActivityIndicator()
     private let itemsPerRow: CGFloat = 2
-    var requestData: [SearchPhotoViewModel]?
-    private var requestPhotoList: [Data] = []
-    private var requestPhoto: PhotosResponse?
     private var currentPage: Int = 1
-    var photoDataSource: PhotosModel?
     var isSearching: Bool = false
 
     
