@@ -9,6 +9,12 @@ import Foundation
 import CoreData
 
 class BaseStorage: BaseStorageProtocol {
+//    func deletePhoto() throws {
+//        <#code#>
+//    }
+//    
+ 
+    
     //Generic save method for any data type
    private let photoList = PhotoList(context: PersistenceService.context)
     func savePhotoDetails(data: Data) throws {
@@ -33,6 +39,11 @@ class BaseStorage: BaseStorageProtocol {
         return try PersistenceService.context.fetch(fetchRequest)
 
    }
+    
+    func deletePhotoList<T:NSManagedObject>(photo: T) {
+        PersistenceService.context.delete(photo)
+    }
+//
 
   
 }

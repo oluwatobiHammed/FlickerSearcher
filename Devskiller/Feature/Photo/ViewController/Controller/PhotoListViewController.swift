@@ -7,12 +7,8 @@
 //
 
 import UIKit
-import CoreData
-
 @available(iOS 15.0, *)
 class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
-    
-    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     let dataSource = PhotosViewDataSource()
@@ -24,13 +20,8 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         return  PhotoViewModel(photoRepo: repo, delegate: self, dataSource: dataSource)
     }()
     var activityIndicator: ActivityIndicator? = ActivityIndicator()
-    private let itemsPerRow: CGFloat = 2
     private var currentPage: Int = 1
     var isSearching: Bool = false
-
-    
-    private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-    var query: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,11 +30,10 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         self.dataSource.data.addAndNotify(observer: self) { [weak self] _ in
             self?.collectionView?.reloadData()
         }
-        query = "dog"
-        handleSearch(query: query!)
+        photoViewModel.query = "dog"
+        handleSearch(query: photoViewModel.query)
         
     }
-    
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
@@ -83,7 +73,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
 extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            PersistenceService.context.delete(PhotoDetail(context: PersistenceService.context))
+            photoViewModel.deletePhotoDetails()
             photoViewModel.presentProfile(indexPath) {  [weak self] in
                                     let _ = StoryBoardsID.boardMain.requestNavigation(to: ViewControllerID.ImageViewController, from: self, requestData: $0)
             }
@@ -97,7 +87,7 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
             if reqphoto.page <  reqphoto.pages && indexPath.row == requData.count - 1 {
                 currentPage += 1
                 self.isSearching = true
-                photoViewModel.searchInfiniteScrollingPhoto(query: query!, pageNo: "\(currentPage)") { _ in
+                photoViewModel.searchInfiniteScrollingPhoto(query: photoViewModel.query, pageNo: "\(currentPage)") { _ in
                     
                 }
             }

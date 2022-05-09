@@ -40,8 +40,6 @@
 		318FB6CE280AB33300DD8687 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6CD280AB33200DD8687 /* AlertView.swift */; };
 		318FB6D0280B326800DD8687 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6CF280B326800DD8687 /* ImageViewController.swift */; };
 		318FB6D2280B330800DD8687 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6D1280B330800DD8687 /* BaseViewController.swift */; };
-		318FB6DD280B3A5700DD8687 /* CategoryLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6D5280B3A5700DD8687 /* CategoryLocalStorage.swift */; };
-		318FB6DE280B3A5700DD8687 /* CategoryLocalStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6D6280B3A5700DD8687 /* CategoryLocalStorageProtocol.swift */; };
 		318FB6E1280B3A5700DD8687 /* BaseStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6DB280B3A5700DD8687 /* BaseStorageProtocol.swift */; };
 		318FB6E2280B3A5700DD8687 /* BaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6DC280B3A5700DD8687 /* BaseStorage.swift */; };
 		318FB6E7280B65C700DD8687 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6E6280B65C700DD8687 /* PersistenceService.swift */; };
@@ -108,8 +106,6 @@
 		318FB6CD280AB33200DD8687 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		318FB6CF280B326800DD8687 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		318FB6D1280B330800DD8687 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		318FB6D5280B3A5700DD8687 /* CategoryLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryLocalStorage.swift; sourceTree = "<group>"; };
-		318FB6D6280B3A5700DD8687 /* CategoryLocalStorageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryLocalStorageProtocol.swift; sourceTree = "<group>"; };
 		318FB6DB280B3A5700DD8687 /* BaseStorageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStorageProtocol.swift; sourceTree = "<group>"; };
 		318FB6DC280B3A5700DD8687 /* BaseStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStorage.swift; sourceTree = "<group>"; };
 		318FB6E6280B65C700DD8687 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
@@ -308,19 +304,9 @@
 			isa = PBXGroup;
 			children = (
 				312C917C280E0EC100C2CAF0 /* DataModel */,
-				318FB6D4280B3A5700DD8687 /* Category */,
 				318FB6DA280B3A5700DD8687 /* Base Storage */,
 			);
 			path = "Local Storage";
-			sourceTree = "<group>";
-		};
-		318FB6D4280B3A5700DD8687 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				318FB6D5280B3A5700DD8687 /* CategoryLocalStorage.swift */,
-				318FB6D6280B3A5700DD8687 /* CategoryLocalStorageProtocol.swift */,
-			);
-			path = Category;
 			sourceTree = "<group>";
 		};
 		318FB6DA280B3A5700DD8687 /* Base Storage */ = {
@@ -550,7 +536,6 @@
 			files = (
 				312C918028103E4400C2CAF0 /* PhotosVC+SearchBarDelegate.swift in Sources */,
 				312C9178280DFFF900C2CAF0 /* PhotoList+CoreDataClass.swift in Sources */,
-				318FB6DE280B3A5700DD8687 /* CategoryLocalStorageProtocol.swift in Sources */,
 				318FB6BA2808D20C00DD8687 /* PhotoRepo.swift in Sources */,
 				312C91882811CC2100C2CAF0 /* ActivityIndicator.swift in Sources */,
 				312C91852810425600C2CAF0 /* PhotosModel.swift in Sources */,
@@ -560,7 +545,6 @@
 				318FB6C628098A9900DD8687 /* UIImageView+Extension.swift in Sources */,
 				318FB6D2280B330800DD8687 /* BaseViewController.swift in Sources */,
 				318FB6CE280AB33300DD8687 /* AlertView.swift in Sources */,
-				318FB6DD280B3A5700DD8687 /* CategoryLocalStorage.swift in Sources */,
 				318FB6E7280B65C700DD8687 /* PersistenceService.swift in Sources */,
 				318FB6D0280B326800DD8687 /* ImageViewController.swift in Sources */,
 				318FB6B82808D1A200DD8687 /* PhotoRepoProtocol.swift in Sources */,

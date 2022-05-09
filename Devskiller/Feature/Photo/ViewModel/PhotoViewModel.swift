@@ -11,6 +11,7 @@ import Foundation
 
 @available(iOS 15.0, *)
 class PhotoViewModel: PhotoViewModelProtocol {
+    var query: String = ""
     private let photoRepo: PhotoRepoProtocol?
     private weak var delegate: PhotoViewDelegateProtocol?
     private  weak var dataSource: GenericDataSource<[PhotoSearchModel]>?
@@ -141,6 +142,15 @@ class PhotoViewModel: PhotoViewModelProtocol {
         }
     }
     
+    func deletePhotoList() {
+       let photos = PhotoList(context: PersistenceService.context)
+        photoRepo?.deletePhotoList(photos: photos)
+    }
+    
+    func deletePhotoDetails() {
+        let photo = PhotoDetail(context: PersistenceService.context)
+        photoRepo?.deletePhotoDetails(photo: photo)
+    }
 }
 
 

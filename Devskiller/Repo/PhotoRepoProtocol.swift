@@ -16,5 +16,7 @@ protocol PhotoRepoProtocol {
     func savePhotoList (data: Data) throws
     func loadPhotoDetails() throws -> Data?
     func loadPhotoList() throws -> [PhotoList]?
+    func deletePhotoList<T:PhotoList>(photos: T)
+    func deletePhotoDetails<T:PhotoDetail>(photo: T)
     
 }

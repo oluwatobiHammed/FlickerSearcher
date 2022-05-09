@@ -18,11 +18,9 @@ extension PhotoListViewController: UITextFieldDelegate {
         else { return true }
         isSearching = true
         // 1
-//        textField.addSubview(activityIndicator)
-//        activityIndicator.frame = textField.bounds
-//        activityIndicator.startAnimating()
-        query = text
-        PersistenceService.context.delete(PhotoList(context: PersistenceService.context))
+        photoViewModel.query = text
+        //PersistenceService.context.delete(PhotoList(context: PersistenceService.context))
+        photoViewModel.deletePhotoList()
         handleSearch(query: text)
         self.collectionView.layoutIfNeeded()
         self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)

@@ -21,6 +21,7 @@ class ImageViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //PersistenceService.context.delete(PhotoDetail(context: PersistenceService.context))
         guard let data = requestData else {
             return
         }

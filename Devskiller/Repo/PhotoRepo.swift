@@ -11,6 +11,7 @@ import Foundation
 
 class PhotoRepo: PhotoRepoProtocol {
 
+
     
     
    private let route: PhotoRouteProtocol?
@@ -47,6 +48,15 @@ class PhotoRepo: PhotoRepoProtocol {
     func loadPhotoList() throws -> [PhotoList]? {
       return  try localStorage?.loadPhotoList()
     }
+    
+    func deletePhotoDetails<T>(photo: T) where T : PhotoDetail {
+        localStorage?.deletePhotoList(photo: photo)
+    }
+    
+    func deletePhotoList<T>(photos: T) where T : PhotoList {
+        localStorage?.deletePhotoList(photo: photos)
+    }
+    
     
     
 }
