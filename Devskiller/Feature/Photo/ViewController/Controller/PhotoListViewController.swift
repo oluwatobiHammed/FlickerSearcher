@@ -19,7 +19,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         let repo = PhotoRepo(route: route, localStorage: storage)
         return  PhotoViewModel(photoRepo: repo, delegate: self, dataSource: dataSource)
     }()
-    var activityIndicator: ActivityIndicator? = ActivityIndicator()
+    //var activityIndicator: ActivityIndicator? = ActivityIndicator()
     private var currentPage: Int = 1
     var isSearching: Bool = false
     override func viewDidLoad() {
@@ -44,18 +44,14 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         return UICollectionViewCompositionalLayout(section: section)
     }
     func handleSearch(query: String) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        activityIndicator?.start()
         photoViewModel.searchPhoto(query:query, pageNo: "\(currentPage)", data: {  _ in   })
-        self.activityIndicator?.stop()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        ActivityIndicator.shared.stop()
         self.collectionView.reloadData()
        
         
     }
     func errorHandler(error: String) {
-        self.activityIndicator?.stop()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        ActivityIndicator.shared.stop()
         guard let photodataLoad = dataSource.data.value.first?.first?.viewModel?.loadPhotoList() else  {
             return
         }
@@ -87,8 +83,9 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
             if reqphoto.page <  reqphoto.pages && indexPath.row == requData.count - 1 {
                 currentPage += 1
                 self.isSearching = true
+                ActivityIndicator.shared.start(view: cell)
                 photoViewModel.searchInfiniteScrollingPhoto(query: photoViewModel.query, pageNo: "\(currentPage)") { _ in
-                    
+                    ActivityIndicator.shared.stop()
                 }
             }
         }

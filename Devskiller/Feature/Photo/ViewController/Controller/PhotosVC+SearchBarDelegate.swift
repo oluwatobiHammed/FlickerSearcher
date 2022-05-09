@@ -19,7 +19,7 @@ extension PhotoListViewController: UITextFieldDelegate {
         isSearching = true
         // 1
         photoViewModel.query = text
-        //PersistenceService.context.delete(PhotoList(context: PersistenceService.context))
+        ActivityIndicator.shared.start(view: textField)
         photoViewModel.deletePhotoList()
         handleSearch(query: text)
         self.collectionView.layoutIfNeeded()
