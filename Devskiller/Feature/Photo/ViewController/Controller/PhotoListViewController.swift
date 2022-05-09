@@ -35,6 +35,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.collectionView?.dataSource = self.dataSource
+        collectionView.collectionViewLayout = createLayout()
         self.dataSource.data.addAndNotify(observer: self) { [weak self] _ in
             self?.collectionView?.reloadData()
         }
@@ -43,6 +44,15 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         
     }
     
+    
+    private func createLayout() -> UICollectionViewCompositionalLayout {
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6)
+        let horizontalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.3)), subitem: item, count: 2)
+        let section = NSCollectionLayoutSection(group: horizontalGroup)
+        // return
+        return UICollectionViewCompositionalLayout(section: section)
+    }
     func handleSearch(query: String) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         activityIndicator?.start()
@@ -71,17 +81,6 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
 @available(iOS 15.0, *)
 // MARK: UICollectionViewDelegateFlowLayout
 extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
-    func setupCollectionView() {
-        guard let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return
-        }
-        layout.scrollDirection = UICollectionView.ScrollDirection.vertical
-        self.collectionView?.collectionViewLayout = layout
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        self.collectionView?.showsHorizontalScrollIndicator = false
-    }
-    
     
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             PersistenceService.context.delete(PhotoDetail(context: PersistenceService.context))
@@ -105,25 +104,7 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
         }
     
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
-        let heightPerItem = widthPerItem + 21
-        return CGSize(width: widthPerItem, height: heightPerItem)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+ 
 }
 
 
