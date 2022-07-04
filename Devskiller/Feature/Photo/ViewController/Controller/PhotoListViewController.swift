@@ -12,16 +12,20 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     let dataSource = PhotosViewDataSource()
+    
     lazy var photoViewModel: PhotoViewModelProtocol = {
-        let service = BaseServices()
-        let route = PhotoRoute(service: service)
-        let storage = BaseStorage()
-        let repo = PhotoRepo(route: route, localStorage: storage)
-        return  PhotoViewModel(photoRepo: repo, delegate: self, dataSource: dataSource)
+        return  PhotoViewModel(photoRepo:
+                                PhotoRepo(route:
+                                PhotoRoute(service:
+                                BaseServices()),
+                                localStorage: BaseStorage()),
+                                delegate: self,
+                                dataSource: dataSource)
     }()
-    //var activityIndicator: ActivityIndicator? = ActivityIndicator()
+    
     private var currentPage: Int = 1
     var isSearching: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -43,13 +47,14 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         // return
         return UICollectionViewCompositionalLayout(section: section)
     }
+    
     func handleSearch(query: String) {
         photoViewModel.searchPhoto(query:query, pageNo: "\(currentPage)", data: {  _ in   })
         ActivityIndicator.shared.stop()
         self.collectionView.reloadData()
-       
         
     }
+    
     func errorHandler(error: String) {
         ActivityIndicator.shared.stop()
         guard let photodataLoad = dataSource.data.value.first?.first?.viewModel?.loadPhotoList() else  {
@@ -62,36 +67,32 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     
 }
 
-
-
 @available(iOS 15.0, *)
 // MARK: UICollectionViewDelegateFlowLayout
 extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            photoViewModel.deletePhotoDetails()
-            photoViewModel.presentProfile(indexPath) {  [weak self] in
-                let _ = StoryBoardsID.boardMain.requestNavigation(to: ImageViewController(), from: self, requestData: $0, mode: .present)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        photoViewModel.deletePhotoDetails()
+        photoViewModel.presentProfile(indexPath) {  [weak self] in
+            let _ = StoryBoardsID.boardMain.requestNavigation(to: ImageViewController(), from: self, requestData: $0, mode: .present)
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let reqphoto = dataSource.data.value.first?.first?.SearchResponse, let requData = dataSource.data.value.first?.first?.searchModel else {
+            return
+        }
+        if reqphoto.page <  reqphoto.pages && indexPath.row == requData.count - 1 {
+            currentPage += 1
+            self.isSearching = true
+            ActivityIndicator.shared.start(view: cell)
+            photoViewModel.searchInfiniteScrollingPhoto(query: photoViewModel.query, pageNo: "\(currentPage)") { _ in
+                ActivityIndicator.shared.stop()
             }
         }
+    }
     
-    
-        func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            guard let reqphoto = dataSource.data.value.first?.first?.SearchResponse, let requData = dataSource.data.value.first?.first?.searchModel else {
-                return
-            }
-            if reqphoto.page <  reqphoto.pages && indexPath.row == requData.count - 1 {
-                currentPage += 1
-                self.isSearching = true
-                ActivityIndicator.shared.start(view: cell)
-                photoViewModel.searchInfiniteScrollingPhoto(query: photoViewModel.query, pageNo: "\(currentPage)") { _ in
-                    ActivityIndicator.shared.stop()
-                }
-            }
-        }
-    
-    
- 
 }
 
 
