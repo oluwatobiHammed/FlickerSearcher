@@ -97,35 +97,6 @@
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="83.705357142857139"/>
         </scene>
-        <!--Image View Controller-->
-        <scene sceneID="m0E-Lz-oda">
-            <objects>
-                <viewController storyboardIdentifier="ImageViewController" id="E4f-ln-fnI" customClass="ImageViewController" customModule="Devskiller" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QP1-FX-ZyK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gxZ-La-Bx9">
-                                <rect key="frame" x="0.0" y="85" width="414" height="696"/>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="JEZ-lD-WIs"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="JEZ-lD-WIs" firstAttribute="bottom" secondItem="gxZ-La-Bx9" secondAttribute="bottom" constant="81" id="5Px-W9-E5s"/>
-                            <constraint firstItem="gxZ-La-Bx9" firstAttribute="trailing" secondItem="JEZ-lD-WIs" secondAttribute="trailing" id="C1O-mt-uSD"/>
-                            <constraint firstItem="gxZ-La-Bx9" firstAttribute="leading" secondItem="JEZ-lD-WIs" secondAttribute="leading" id="ScH-Xd-hYL"/>
-                            <constraint firstItem="gxZ-La-Bx9" firstAttribute="top" secondItem="JEZ-lD-WIs" secondAttribute="top" constant="41" id="f0B-PK-hGJ"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="largeImageView" destination="gxZ-La-Bx9" id="PCf-f4-A4I"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QGJ-c6-ao7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1708.6956521739132" y="99.776785714285708"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="CF7-7o-ygk">
             <objects>

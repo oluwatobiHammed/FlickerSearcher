@@ -38,7 +38,7 @@ class BaseViewController: UIViewController, ViewControllerPresentRequestDataRece
         }
         self.displayViewController(fromRequest: request)
         
-        DynamicViewControllerPathResolver.shared.presentNextViewController()
+        //DynamicViewControllerPathResolver.shared.presentNextViewController()
         
     }
     

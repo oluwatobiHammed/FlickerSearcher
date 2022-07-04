@@ -71,7 +71,7 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             photoViewModel.deletePhotoDetails()
             photoViewModel.presentProfile(indexPath) {  [weak self] in
-                                    let _ = StoryBoardsID.boardMain.requestNavigation(to: ViewControllerID.ImageViewController, from: self, requestData: $0)
+                let _ = StoryBoardsID.boardMain.requestNavigation(to: ImageViewController(), from: self, requestData: $0, mode: .present)
             }
         }
     

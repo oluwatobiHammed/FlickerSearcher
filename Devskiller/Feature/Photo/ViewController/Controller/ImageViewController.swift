@@ -10,22 +10,45 @@ import UIKit
 
 class ImageViewController: BaseViewController {
 
-    @IBOutlet weak var largeImageView: UIImageView!
     private var requestData: Data?
     override var presentRequestData: Any? {
         didSet {
             requestData = presentRequestData as? Data
         }
     }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private lazy var largeImageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+       return imageView
+    }()
+    
+    func setUpView() {
+        view.addSubview(largeImageView)
+        NSLayoutConstraint.activate([
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: largeImageView.bottomAnchor, constant: 41),
+            largeImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            largeImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            largeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 41)
+        ])
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        //PersistenceService.context.delete(PhotoDetail(context: PersistenceService.context))
+        setUpView()
         guard let data = requestData else {
             return
         }
-        
         largeImageView.load(data: data)
     }
     

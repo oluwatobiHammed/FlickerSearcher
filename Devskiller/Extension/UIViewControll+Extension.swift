@@ -103,33 +103,27 @@ extension UIViewController {
             fromRequest.viewController.modalPresentationStyle = .overCurrentContext
             self.present(fromRequest.viewController, animated: true) {
                 fromRequest.didPresentSubject = true
-//                fromRequest.didPresentSubject.onCompleted()
             }
         case .presentForce:
             self.present(fromRequest.viewController, animated: true){
                 fromRequest.didPresentSubject = true
-//                fromRequest.didPresentSubject.onCompleted()
             }
         case .present:
             if let navController = self.navigationController {
                 navController.pushViewController(fromRequest.viewController, animated: true)
                 fromRequest.didPresentSubject = true
-//                fromRequest.didPresentSubject.onCompleted()
             }
             else{
                 self.present(fromRequest.viewController, animated: true) {
                     fromRequest.didPresentSubject = true
-//                    fromRequest.didPresentSubject.onCompleted()
                 }
             }
         case .root:
             let _ = StoryBoardsID.makeAsRoot(using: fromRequest.viewController)
             fromRequest.didPresentSubject = true
-//            fromRequest.didPresentSubject.onCompleted()
         case .addToParent:
             self.addToParent(fromRequest.viewController)
             fromRequest.didPresentSubject = true
-//            fromRequest.didPresentSubject.onCompleted()
         }
     }
     

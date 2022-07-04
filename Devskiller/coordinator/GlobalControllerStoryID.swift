@@ -8,31 +8,13 @@
 import Foundation
 import UIKit
 
-class DynamicViewControllerPathResolver {
-    
-    static let shared = DynamicViewControllerPathResolver()
-    
-    fileprivate init() {
-        
-    }
-    
-    var paths: [(String, Any?)] = []
-    
-    func presentNextViewController() {
-        if paths.count > 0 {
-            let first = paths.removeFirst()
-            let _ = StoryBoardsID.resolvePath(path: first.0, requestData: first.1)
-        }
-    }
-}
 
 enum StoryBoardsID: String {
     case boardMain = "Main"
     
     
-    func get(for controllerId: ViewControllerID)-> UIViewController? {
-        let storyboard = UIStoryboard(name:self.rawValue, bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: controllerId.rawValue)
+    func get(for controllerId: UIViewController?)-> UIViewController? {
+        return controllerId
     }
     
     func initialController()-> UIViewController? {
@@ -46,7 +28,7 @@ enum StoryBoardsID: String {
         }
     }
     
-    func makeAsRoot(using: ViewControllerID)-> Bool {
+    func makeAsRoot(using: UIViewController)-> Bool {
         if let controller = self.get(for: using) {
             return StoryBoardsID.makeAsRoot(using: controller)
         }
@@ -54,9 +36,12 @@ enum StoryBoardsID: String {
     }
     
     static func makeAsRoot(using: UIViewController)-> Bool {
-        if let delegate = UIApplication.shared.delegate {
-            if let window = delegate.window {
-                window?.rootViewController = using
+        if let delegate = UIApplication.shared.connectedScenes.first{
+            if let sd : SceneDelegate = (delegate.delegate as? SceneDelegate) {
+                if let window = sd.window {
+                    window.rootViewController = using
+                    return true
+                }
                 return true
             }
         }
@@ -65,7 +50,7 @@ enum StoryBoardsID: String {
     
     
     
-    func navigate(to: ViewControllerID, from: UIViewController, asRoot: Bool = false, completion: (() -> Swift.Void)? = nil)-> Bool {
+    func navigate(to: UIViewController, from: UIViewController, asRoot: Bool = false, completion: (() -> Swift.Void)? = nil)-> Bool {
         if asRoot {
             return makeAsRoot(using: to)
         }
@@ -83,11 +68,11 @@ enum StoryBoardsID: String {
         return true
     }
     
-    func requestNavigation(to: ViewControllerID, requestData: Any?, mode: ViewControllerPresentationMode = .present)-> ViewControllerPresentRequest? {
+    func requestNavigation(to: UIViewController?, requestData: Any?, mode: ViewControllerPresentationMode = .present)-> ViewControllerPresentRequest? {
         return self.requestNavigation(to: to, from: nil, requestData: requestData, mode: mode)
     }
     
-    func requestNavigation(to: ViewControllerID, from: UIViewController?, requestData: Any?, mode: ViewControllerPresentationMode = .present)-> ViewControllerPresentRequest? {
+    func requestNavigation(to: UIViewController?, from: UIViewController?, requestData: Any?, mode: ViewControllerPresentationMode = .present)-> ViewControllerPresentRequest? {
         if let controller = self.get(for: to) {
             let request = ViewControllerPresentRequest(mode: mode, viewController: controller)
             request.presenter = from
@@ -97,31 +82,4 @@ enum StoryBoardsID: String {
         }
         return nil
     }
-    
-    func translateToPath(controllerId: ViewControllerID)-> String {
-        return "\(self.rawValue).\(controllerId.rawValue)"
-    }
-    
-    func translateWithRequestData(controllerId: ViewControllerID, data: Any?)-> (String, Any?) {
-        return (self.translateToPath(controllerId: controllerId), data)
-    }
-    
-    static func resolvePath(path: String, requestData: Any?)-> UIViewController? {
-        let splits = path.components(separatedBy: ".")
-        if splits.count == 2 {
-            if let storyBoard = StoryBoardsID(rawValue: splits[0]) {
-                if let controllerId = ViewControllerID(rawValue: splits[1]) {
-                    if let request = storyBoard.requestNavigation(to: controllerId, requestData: requestData) {
-                        return request.viewController
-                    }
-                }
-            }
-        }
-        return nil
-    }
 }
-
-enum ViewControllerID: String{
-    case ImageViewController = "ImageViewController"
-}
-
