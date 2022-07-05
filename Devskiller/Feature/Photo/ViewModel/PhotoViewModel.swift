@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-@available(iOS 15.0, *)
 class PhotoViewModel: PhotoViewModelProtocol {
     var query: String = ""
     private let photoRepo: PhotoRepoProtocol?
@@ -143,7 +141,7 @@ class PhotoViewModel: PhotoViewModelProtocol {
     }
     
     func deletePhotoList() {
-       let photos = PhotoList(context: PersistenceService.context)
+        let photos = PhotoList(context: PersistenceService.context)
         photoRepo?.deletePhotoList(photos: photos)
     }
     

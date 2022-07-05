@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 
+@available(iOS 15.0, *)
 enum StoryBoardsID: String {
     case boardMain = "Main"
     

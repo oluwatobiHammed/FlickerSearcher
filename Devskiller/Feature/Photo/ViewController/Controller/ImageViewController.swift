@@ -8,8 +8,9 @@
 
 import UIKit
 
+@available(iOS 15.0, *)
 class ImageViewController: BaseViewController {
-
+    
     private var requestData: Data?
     override var presentRequestData: Any? {
         didSet {
@@ -26,11 +27,11 @@ class ImageViewController: BaseViewController {
     }
     
     private lazy var largeImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-       return imageView
+        return imageView
     }()
     
     func setUpView() {
@@ -52,7 +53,7 @@ class ImageViewController: BaseViewController {
         largeImageView.load(data: data)
     }
     
-
-  
-
+    
+    
+    
 }

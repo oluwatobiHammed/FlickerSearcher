@@ -21,7 +21,6 @@ enum HttpMethod: String {
 }
 
 
-@available(iOS 15.0, *)
 class BaseServices: ServicesProtocol {
     private lazy var session: URLSession = {
         // Set In-Memory Cache to 512 MB
@@ -40,21 +39,35 @@ class BaseServices: ServicesProtocol {
         guard let url = endpoint.url else { throw ApiError.badUrl}
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        let (data, response) = try await  session.data(for: request)
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {throw ApiError.InvalidServerResponse}
-        let responseObject = "\(String(decoding: data, as: UTF8.self))"
+        var responseObject = ""
+        if #available(iOS 15.0, *) {
+            let (data, response) = try await  session.data(for: request)
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {throw ApiError.InvalidServerResponse}
+            responseObject = "\(String(decoding: data, as: UTF8.self))"
+          
+        } else {
+            // Fallback on earlier versions
+        }
         let jsonString = responseObject.localizedCaseInsensitiveContains("fail") ?
         try self.getJsonString(withKey: "error", forValue: responseObject) :
         try self.getJsonString(withKey: "data", forValue: responseObject)
-        //map the result of `jsonString` above to the `responseType`
         return try? responseType.mapTo(jsonString: jsonString)
+        //map the result of `jsonString` above to the `responseType`
+        
     }
     
     func imageDownload(_ urlString: String, method: HttpMethod) async throws -> Data? {
         guard let url = URL(string: urlString) else { throw ApiError.badUrl}
         var request = URLRequest(url: url)
+        var data = Data()
+        var response = URLResponse()
         request.httpMethod = method.rawValue
-        let (data, response) = try await  session.data(for: request)
+        if #available(iOS 15.0, *) {
+             (data, response) = try await  session.data(for: request)
+          
+        } else {
+            // Fallback on earlier versions
+        }
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {throw ApiError.InvalidServerResponse}
         return data
     }

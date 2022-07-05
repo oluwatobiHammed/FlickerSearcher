@@ -71,6 +71,7 @@ protocol ViewControllerPresentRequestDataReceiver {
     var presentRequestData: Any? {get set}
 }
 
+@available(iOS 15.0, *)
 extension UIViewController {
     
     func add(child: UIViewController, container: UIView, configure: (_ childView: UIView) -> Void = { _ in }) {

@@ -25,18 +25,23 @@ class BaseViewController: UIViewController, ViewControllerPresentRequestDataRece
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // observeAlerts()
+        // observeAlerts()
         // Do any additional setup after loading the view.
     }
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         BaseViewController.displayingViewController = self
-        guard let request = ViewControllerPresenter.shared.presentViewControllerObserver else {
-            return
+        if #available(iOS 15.0, *) {
+            guard let request = ViewControllerPresenter.shared.presentViewControllerObserver else {
+                return
+            }
+            self.displayViewController(fromRequest: request)
+        } else {
+            // Fallback on earlier versions
         }
-        self.displayViewController(fromRequest: request)
+        
         
         //DynamicViewControllerPathResolver.shared.presentNextViewController()
         
@@ -45,7 +50,11 @@ class BaseViewController: UIViewController, ViewControllerPresentRequestDataRece
     override func viewWillDisappear(_ animated: Bool) {
         BaseViewController.displayingViewController = nil
         if self.isMovingFromParent {
-            self.onRemovingFromParent()
+            if #available(iOS 15.0, *) {
+                self.onRemovingFromParent()
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }
