@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PhotoViewModel: PhotoViewModelProtocol {
+class PhotoListViewModel: PhotoListViewModelProtocol {
     var query: String = ""
     private let photoRepo: PhotoRepoProtocol?
     private weak var delegate: PhotoViewDelegateProtocol?
@@ -123,8 +123,8 @@ class PhotoViewModel: PhotoViewModelProtocol {
         return nil
     }
     
-    func presentProfile(_ indexPath: IndexPath,
-                        completion: ((Data) -> Void)? = nil) {
+    func presentImage(_ indexPath: IndexPath,
+                      completion: ((Data) -> Void)? = nil) {
         if let urlString = self.dataSource?.data.value.first?.first?.searchModel?[indexPath.row].flickrImageURL("b")
         {
             imageDownload(urlString: urlString) {

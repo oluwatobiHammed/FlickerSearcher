@@ -35,6 +35,8 @@ class ImageViewController: BaseViewController {
     }()
     
     func setUpView() {
+        navigationItem.title = "Image"
+        view.backgroundColor = .tertiarySystemGroupedBackground
         view.addSubview(largeImageView)
         NSLayoutConstraint.activate([
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: largeImageView.bottomAnchor, constant: 41),

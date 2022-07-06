@@ -12,8 +12,8 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     
     let dataSource = PhotosViewDataSource()
     
-    lazy var photoViewModel: PhotoViewModelProtocol = {
-        return  PhotoViewModel(photoRepo:
+    lazy var photoViewModel: PhotoListViewModelProtocol = {
+        return  PhotoListViewModel(photoRepo:
                                 PhotoRepo(route:
                                             PhotoRoute(service:
                                                         BaseServices()),
@@ -61,13 +61,13 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         navigationItem.title = "Home"
         NSLayoutConstraint.activate([
             searchTextField.heightAnchor.constraint(equalToConstant: 60),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: searchTextField.trailingAnchor),
-            searchTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: searchTextField.trailingAnchor, constant: 5),
+            searchTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
         ])
         
@@ -127,7 +127,7 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         photoViewModel.deletePhotoDetails()
-        photoViewModel.presentProfile(indexPath) {  [weak self] in
+        photoViewModel.presentImage(indexPath) {  [weak self]  in
             let _ = StoryBoardsID.boardMain.requestNavigation(to: ImageViewController(), from: self, requestData: $0, mode: .present)
         }
     }

@@ -31,8 +31,8 @@
 		318FB6B52808CE4A00DD8687 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6B42808CE4A00DD8687 /* Size.swift */; };
 		318FB6B82808D1A200DD8687 /* PhotoRepoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6B72808D1A200DD8687 /* PhotoRepoProtocol.swift */; };
 		318FB6BA2808D20C00DD8687 /* PhotoRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6B92808D20C00DD8687 /* PhotoRepo.swift */; };
-		318FB6C02808D34000DD8687 /* PhotoViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6BF2808D34000DD8687 /* PhotoViewModelProtocol.swift */; };
-		318FB6C22808D35500DD8687 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6C12808D35500DD8687 /* PhotoViewModel.swift */; };
+		318FB6C02808D34000DD8687 /* PhotoListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6BF2808D34000DD8687 /* PhotoListViewModelProtocol.swift */; };
+		318FB6C22808D35500DD8687 /* PhotoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6C12808D35500DD8687 /* PhotoListViewModel.swift */; };
 		318FB6C42808D87300DD8687 /* PhotoViewDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6C32808D87300DD8687 /* PhotoViewDelegateProtocol.swift */; };
 		318FB6C628098A9900DD8687 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6C528098A9900DD8687 /* UIImageView+Extension.swift */; };
 		318FB6C82809B93C00DD8687 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318FB6C72809B93C00DD8687 /* PhotoCollectionViewCell.swift */; };
@@ -96,8 +96,8 @@
 		318FB6B42808CE4A00DD8687 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		318FB6B72808D1A200DD8687 /* PhotoRepoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepoProtocol.swift; sourceTree = "<group>"; };
 		318FB6B92808D20C00DD8687 /* PhotoRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepo.swift; sourceTree = "<group>"; };
-		318FB6BF2808D34000DD8687 /* PhotoViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModelProtocol.swift; sourceTree = "<group>"; };
-		318FB6C12808D35500DD8687 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		318FB6BF2808D34000DD8687 /* PhotoListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewModelProtocol.swift; sourceTree = "<group>"; };
+		318FB6C12808D35500DD8687 /* PhotoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewModel.swift; sourceTree = "<group>"; };
 		318FB6C32808D87300DD8687 /* PhotoViewDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewDelegateProtocol.swift; sourceTree = "<group>"; };
 		318FB6C528098A9900DD8687 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		318FB6C72809B93C00DD8687 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -273,8 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				312C91832810423F00C2CAF0 /* PhotosView */,
-				318FB6BF2808D34000DD8687 /* PhotoViewModelProtocol.swift */,
-				318FB6C12808D35500DD8687 /* PhotoViewModel.swift */,
+				318FB6BF2808D34000DD8687 /* PhotoListViewModelProtocol.swift */,
+				318FB6C12808D35500DD8687 /* PhotoListViewModel.swift */,
 				318FB6F0280C429500DD8687 /* SearchPhotoViewModel.swift */,
 				312C917D28103C9400C2CAF0 /* DynamicValue.swift */,
 			);
@@ -561,8 +561,8 @@
 				48D69BC92514ECC700DD96AA /* SceneDelegate.swift in Sources */,
 				312C917B280DFFF900C2CAF0 /* PhotoDetail+CoreDataProperties.swift in Sources */,
 				318FB6C82809B93C00DD8687 /* PhotoCollectionViewCell.swift in Sources */,
-				318FB6C02808D34000DD8687 /* PhotoViewModelProtocol.swift in Sources */,
-				318FB6C22808D35500DD8687 /* PhotoViewModel.swift in Sources */,
+				318FB6C02808D34000DD8687 /* PhotoListViewModelProtocol.swift in Sources */,
+				318FB6C22808D35500DD8687 /* PhotoListViewModel.swift in Sources */,
 				318FB695280818CE00DD8687 /* ServicesProtocol.swift in Sources */,
 				318FB6E2280B3A5700DD8687 /* BaseStorage.swift in Sources */,
 				318FB6A728082D7C00DD8687 /* ApiResponse.swift in Sources */,

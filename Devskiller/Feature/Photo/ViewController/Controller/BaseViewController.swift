@@ -25,7 +25,6 @@ class BaseViewController: UIViewController, ViewControllerPresentRequestDataRece
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // observeAlerts()
         // Do any additional setup after loading the view.
     }
     

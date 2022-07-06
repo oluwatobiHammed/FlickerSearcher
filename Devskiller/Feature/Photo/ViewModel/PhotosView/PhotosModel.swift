@@ -14,7 +14,7 @@ struct PhotoSearchModel {
     let searchdata: [Data]?
     let SearchResponse: PhotosResponse
     let searchModel: [SearchPhotoViewModel]?
-    let viewModel: PhotoViewModelProtocol?
+    let viewModel: PhotoListViewModelProtocol?
 }
 
 
