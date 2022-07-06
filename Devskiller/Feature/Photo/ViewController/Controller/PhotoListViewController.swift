@@ -70,9 +70,6 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             collectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
         ])
-        
-        
-        
     }
     
     override func viewDidLoad() {
@@ -85,7 +82,6 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         }
         view.backgroundColor = .tertiarySystemGroupedBackground
         setUpView()
-        
         searchTextField.delegate = self
         photoViewModel.query = "dog"
         handleSearch(query: photoViewModel.query)
@@ -132,6 +128,33 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            // Create an action for sharing
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
+                // Show share sheet
+                self?.photoViewModel.presentImage(indexPath) { [weak self] in
+                    guard let image = UIImage(data: $0) else {
+                        return
+                    }
+                    let ac = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        let nav = UINavigationController(rootViewController: ac)
+                        nav.modalPresentationStyle = UIModalPresentationStyle.popover
+                        let popover = nav.popoverPresentationController as UIPopoverPresentationController?
+                        ac.preferredContentSize = CGSize(width: 350,height: 600)
+                        popover?.sourceView = self?.view
+                        popover?.sourceRect = CGRect(x: 350,y: 350,width: 0,height: 0)
+                        self?.present(nav, animated: true, completion: nil)
+                    }else {
+                        self?.present(ac, animated: true, completion: nil)
+                    }
+                }
+            }
+            // Create a UIMenu with all the actions as children
+            return UIMenu(title: "", children: [share])
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let reqphoto = dataSource.data.value.first?.first?.SearchResponse, let requData = dataSource.data.value.first?.first?.searchModel else {
