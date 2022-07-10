@@ -25,8 +25,6 @@ enum SlideDirection {
     case bottom
 }
 
-
-
 protocol OverlayViewController {
     var navigationBarIsHidden: Bool { get set }
 }
@@ -48,8 +46,6 @@ class ViewControllerPresentRequest {
             didRemove = didPresentSubject
         }
     }
-    
-
     
     init(mode: ViewControllerPresentationMode, viewController: UIViewController) {
         self.mode = mode
@@ -81,8 +77,6 @@ extension UIViewController {
         child.didMove(toParent: self)
     }
     
-    
-    
     func getNavigationViewController()-> UINavigationController? {
         if let navController = self.parent as? UINavigationController {
             return navController
@@ -105,20 +99,24 @@ extension UIViewController {
             self.present(fromRequest.viewController, animated: true) {
                 fromRequest.didPresentSubject = true
             }
+            
         case .presentForce:
             self.present(fromRequest.viewController, animated: true){
                 fromRequest.didPresentSubject = true
             }
+            
         case .present:
             if let navController = self.navigationController {
-                navController.pushViewController(fromRequest.viewController, animated: true)
+                navController.pushViewControllerFromRight(controller: fromRequest.viewController)
                 fromRequest.didPresentSubject = true
             }
-            else{
+            
+            else {
                 self.present(fromRequest.viewController, animated: true) {
                     fromRequest.didPresentSubject = true
                 }
             }
+            
         case .root:
             let _ = StoryBoardsID.makeAsRoot(using: fromRequest.viewController)
             fromRequest.didPresentSubject = true
@@ -129,9 +127,7 @@ extension UIViewController {
     }
     
     func addToParent(_ child: UIViewController, slideFrom: SlideDirection? = nil, duration: TimeInterval = 0.5, completion: EmptyCallback? = nil) {
-    
         
-    
         var navigationBar: UINavigationBar? = nil
         if var buttonSheetController = child as? OverlayViewController {
             if let navControl = self.getNavigationViewController() {
@@ -175,9 +171,11 @@ extension UIViewController {
                     childView?.frame.origin.x = 0
                 }
             }
+            
             else {
                 childView?.alpha = 1
             }
+            
         }){ (completed: Bool) in
             child.didMove(toParent: self)
             if let completion = completion {
@@ -186,9 +184,6 @@ extension UIViewController {
         }
         
         UIView.animate(withDuration: duration + 0.3, animations: {
-//            if let navBar = navigationBar {
-////                navBar.alpha = 0
-//            }
         }) {
             (completed: Bool) in
             if completed {
@@ -217,5 +212,14 @@ extension UINavigationController {
         popViewController(animated: animated)
         CATransaction.commit()
     }
+    
+    func pushViewControllerFromRight(controller: UIViewController)  {
+        let transition = CATransition()
+        transition.duration = 0.7
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        view.window?.layer.add(transition, forKey: kCATransition)
+        pushViewController(controller, animated: false)
+    }
 }
-

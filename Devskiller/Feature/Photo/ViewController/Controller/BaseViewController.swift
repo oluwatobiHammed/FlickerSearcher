@@ -22,12 +22,10 @@ class BaseViewController: UIViewController, ViewControllerPresentRequestDataRece
         print("Disposing \(self)")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,9 +38,6 @@ class BaseViewController: UIViewController, ViewControllerPresentRequestDataRece
         } else {
             // Fallback on earlier versions
         }
-        
-        
-        //DynamicViewControllerPathResolver.shared.presentNextViewController()
         
     }
     

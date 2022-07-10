@@ -20,7 +20,6 @@ enum HttpMethod: String {
     case PUT
 }
 
-
 class BaseServices: ServicesProtocol {
     private lazy var session: URLSession = {
         // Set In-Memory Cache to 512 MB
@@ -44,7 +43,7 @@ class BaseServices: ServicesProtocol {
             let (data, response) = try await  session.data(for: request)
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {throw ApiError.InvalidServerResponse}
             responseObject = "\(String(decoding: data, as: UTF8.self))"
-          
+            
         } else {
             // Fallback on earlier versions
         }

@@ -55,7 +55,4 @@ class ImageViewController: BaseViewController {
         largeImageView.load(data: data)
     }
     
-    
-    
-    
 }
