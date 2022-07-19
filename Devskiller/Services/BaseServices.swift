@@ -34,7 +34,7 @@ class BaseServices: ServicesProtocol {
         return URLSession(configuration: configuration)
     }()
     
-    func baseNetwork<ResponseType: Decodable>(_ endpoint: Endpoint, method: HttpMethod, responseType: ResponseType.Type) async throws -> ResponseType? {
+    func baseNetwork<ResponseType: Decodable>(_ endpoint: Endpoint, method: HttpMethod, responseType: ResponseType.Type) async throws -> ResponseType {
         guard let url = endpoint.url else { throw ApiError.badUrl}
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
@@ -50,8 +50,10 @@ class BaseServices: ServicesProtocol {
         let jsonString = responseObject.localizedCaseInsensitiveContains("fail") ?
         try self.getJsonString(withKey: "error", forValue: responseObject) :
         try self.getJsonString(withKey: "data", forValue: responseObject)
-        return try? responseType.mapTo(jsonString: jsonString)
         //map the result of `jsonString` above to the `responseType`
+        guard let response = try? responseType.mapTo(jsonString: jsonString) else { throw ApiError.InvalidServerResponse}
+        return response
+       
         
     }
     
