@@ -21,6 +21,8 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
                                dataSource: dataSource)
     }()
     
+
+    
     private lazy var searchTextField: UITextField = {
         let textField = UITextField()
         textField.textAlignment = .natural
@@ -28,6 +30,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .roundedRect
         textField.minimumFontSize = 17
+        textField.accessibilityIdentifier = "searchTextField"
         textField.backgroundColor = .systemBackground
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -37,6 +40,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         let collection = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
         collection.isPrefetchingEnabled = true
         collection.clipsToBounds = true
+        collection.accessibilityIdentifier = "photocollectionView"
         collection.collectionViewLayout = createLayout(height: 0.3)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
@@ -81,6 +85,13 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             self?.collectionView.reloadData()
         }
         view.backgroundColor = .tertiarySystemGroupedBackground
+        if photoViewModel == nil {
+
+            #if DEBUG
+            //signupUrl = ProcessInfo.processInfo.environment["signupUrl"] ?? SignupConstants.signupURLString
+            #endif
+            
+        }
         setUpView()
         searchTextField.delegate = self
         photoViewModel.query = "dog"

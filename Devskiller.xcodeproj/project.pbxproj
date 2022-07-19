@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311550BD2887287100AF1AD6 /* PhotoListUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311550BC2887287100AF1AD6 /* PhotoListUITest.swift */; };
 		312C9178280DFFF900C2CAF0 /* PhotoList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9174280DFFF900C2CAF0 /* PhotoList+CoreDataClass.swift */; };
 		312C9179280DFFF900C2CAF0 /* PhotoList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9175280DFFF900C2CAF0 /* PhotoList+CoreDataProperties.swift */; };
 		312C917A280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C9176280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift */; };
@@ -51,7 +52,6 @@
 		48D69BD32514ECC800DD96AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48D69BD22514ECC800DD96AA /* Assets.xcassets */; };
 		48D69BD62514ECC800DD96AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D69BD42514ECC800DD96AA /* LaunchScreen.storyboard */; };
 		48D69BE12514ECC800DD96AA /* DevskillerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D69BE02514ECC800DD96AA /* DevskillerTests.swift */; };
-		48D69BEC2514ECC800DD96AA /* DevskillerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D69BEB2514ECC800DD96AA /* DevskillerUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		311550BC2887287100AF1AD6 /* PhotoListUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListUITest.swift; sourceTree = "<group>"; };
 		312C9174280DFFF900C2CAF0 /* PhotoList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		312C9175280DFFF900C2CAF0 /* PhotoList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		312C9176280DFFF900C2CAF0 /* PhotoDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		48D69BE02514ECC800DD96AA /* DevskillerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevskillerTests.swift; sourceTree = "<group>"; };
 		48D69BE22514ECC800DD96AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48D69BE72514ECC800DD96AA /* DevskillerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevskillerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		48D69BEB2514ECC800DD96AA /* DevskillerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevskillerUITests.swift; sourceTree = "<group>"; };
 		48D69BED2514ECC800DD96AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -393,8 +393,8 @@
 		48D69BEA2514ECC800DD96AA /* DevskillerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				48D69BEB2514ECC800DD96AA /* DevskillerUITests.swift */,
 				48D69BED2514ECC800DD96AA /* Info.plist */,
+				311550BC2887287100AF1AD6 /* PhotoListUITest.swift */,
 			);
 			path = DevskillerUITests;
 			sourceTree = "<group>";
@@ -585,7 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48D69BEC2514ECC800DD96AA /* DevskillerUITests.swift in Sources */,
+				311550BD2887287100AF1AD6 /* PhotoListUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
