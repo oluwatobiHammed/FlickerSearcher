@@ -19,7 +19,6 @@ class PhotoListUITest: XCTestCase {
         try super.setUpWithError()
         app = XCUIApplication()
         app.launch()
-        
         searchTextField = app.textFields["searchTextField"]
         collectionViews = app.collectionViews["photocollectionView"]
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -51,14 +50,22 @@ class PhotoListUITest: XCTestCase {
     }
     
     
-    func testPhotoListViewController_whenAnErrorOccur() throws {
+    func testPhotoListViewController_CellBeenTapped() throws {
         // UI tests must launch the application that they test.
         let searchtextfieldTextField = app/*@START_MENU_TOKEN@*/.textFields["searchTextField"]/*[[".textFields[\"  search\"]",".textFields[\"searchTextField\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         searchtextfieldTextField.tap()
-        app.collectionViews["photocollectionView"].children(matching: .cell).element(boundBy: 0).swipeDown()
+        collectionViews.children(matching: .cell).element(boundBy: 0).swipeDown()
         searchtextfieldTextField.tap()
         searchtextfieldTextField.tap()
         
+        
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testPhotoListViewController_FlowtoImageViewController() throws {
+        // UI tests must launch the application that they test.
+        collectionViews.children(matching: .cell).element(boundBy: 0).tap()
+        XCTAssert(app.otherElements["imageViewController"].waitForExistence(timeout: 1), "The imageViewController was not created when the cell is tapped")
         
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }

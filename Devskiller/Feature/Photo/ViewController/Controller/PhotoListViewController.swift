@@ -85,13 +85,6 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             self?.collectionView.reloadData()
         }
         view.backgroundColor = .tertiarySystemGroupedBackground
-        if photoViewModel == nil {
-
-            #if DEBUG
-            //signupUrl = ProcessInfo.processInfo.environment["signupUrl"] ?? SignupConstants.signupURLString
-            #endif
-            
-        }
         setUpView()
         searchTextField.delegate = self
         photoViewModel.query = "dog"
@@ -138,7 +131,9 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         photoViewModel.presentImage(indexPath) {  [weak self]  in
-            let _ = StoryBoardsID.boardMain.requestNavigation(to: ImageViewController(), from: self, requestData: $0, mode: .present)
+            let imageViewController = ImageViewController()
+            let _ = StoryBoardsID.boardMain.requestNavigation(to: imageViewController, from: self, requestData: $0, mode: .present)
+            imageViewController.view.accessibilityIdentifier = "imageViewController"
         }
     }
     
