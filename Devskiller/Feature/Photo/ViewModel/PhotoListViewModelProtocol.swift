@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 protocol PhotoListViewModelProtocol {
     var query: String {set get}
-    func searchPhoto(query: String, pageNo: String, data: @escaping (PhotoSearchModel) -> Void)
+    func searchPhoto(query: String, pageNo: String)
     func searchInfiniteScrollingPhoto(query: String, pageNo: String, data: @escaping (PhotoSearchModel) -> Void)
     func imageDownload (urlString: String, data: @escaping (Data) -> Void)
     func savePhotoList (data: Data)

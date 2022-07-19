@@ -20,7 +20,7 @@ class PhotoListViewModel: PhotoListViewModelProtocol {
         self.dataSource = dataSource
     }
     
-    func searchPhoto(query: String, pageNo: String, data: @escaping (PhotoSearchModel) -> Void )  {
+    func searchPhoto(query: String, pageNo: String)  {
         Task {
             do {
                 let response =  try await photoRepo?.getShearchPhotos(query: query, page: pageNo)

@@ -11,7 +11,6 @@ import UIKit
 class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     
     let dataSource = PhotosViewDataSource()
-    
     lazy var photoViewModel: PhotoListViewModelProtocol = {
         return  PhotoListViewModel(photoRepo:
                                 PhotoRepo(route:
@@ -38,7 +37,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         let collection = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
         collection.isPrefetchingEnabled = true
         collection.clipsToBounds = true
-        collection.collectionViewLayout = createLayout()
+        collection.collectionViewLayout = createLayout(height: 0.3)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
@@ -57,6 +56,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     func setUpView () {
         view.addSubview(searchTextField)
         view.addSubview(collectionView)
+        collectionView.collectionViewLayout = UIDevice.current.orientation.isLandscape ? createLayout(height: 1) : createLayout(height: 0.3)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
         navigationItem.title = "Home"
         NSLayoutConstraint.activate([
@@ -65,8 +65,8 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
             searchTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: 5),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             collectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
         ])
@@ -88,10 +88,14 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
         
     }
     
-    private func createLayout() -> UICollectionViewCompositionalLayout {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout = UIDevice.current.orientation.isLandscape ? createLayout(height: 1) : createLayout(height: 0.3)
+    }
+    private func createLayout(height: CGFloat) -> UICollectionViewCompositionalLayout {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6)
-        let horizontalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.3)), subitem: item, count: 2)
+        let horizontalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(height)), subitem: item, count: 2)
         let section = NSCollectionLayoutSection(group: horizontalGroup)
         
         // return UICollectionViewCompositionalLayout set
@@ -99,7 +103,7 @@ class PhotoListViewController: BaseViewController, PhotoViewDelegateProtocol {
     }
     
     func handleSearch(query: String) {
-        photoViewModel.searchPhoto(query:query, pageNo: "\(currentPage)", data: {  _ in   })
+        photoViewModel.searchPhoto(query:query, pageNo: "\(currentPage)")
         ActivityIndicator.shared.stop()
         self.collectionView.reloadData()
         
