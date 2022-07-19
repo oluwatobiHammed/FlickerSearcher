@@ -55,23 +55,6 @@ class PhotoListViewModel: PhotoListViewModelProtocol {
             }
         }
     }
-    func getPhotSize(id: String, data: @escaping (String) -> Void) {
-        Task {
-            do {
-                let response = try await photoRepo?.getPhotosSize(id: id)
-                if let url = response?.data?.sizes?.size[1] {
-                    data(url.source)
-                }
-                
-                if let errorMessage = response?.error?.message   {
-                    delegate?.errorHandler(error: errorMessage)
-                }
-                
-            }catch {
-                delegate?.errorHandler(error: error.localizedDescription)
-            }
-        }
-    }
     
     func imageDownload (urlString: String, data: @escaping (Data) -> Void) {
         Task {
@@ -102,17 +85,7 @@ class PhotoListViewModel: PhotoListViewModelProtocol {
             delegate?.errorHandler(error: error.localizedDescription)
         }
     }
-    
-    func loadPhotoDetails() -> Data? {
-        do{
-            let data =  try photoRepo?.loadPhotoDetails()
-            return data
-        }catch {
-            delegate?.errorHandler(error: error.localizedDescription)
-        }
-        return nil
-    }
-    
+
     func loadPhotoList() -> [Data]? {
         do{
             return  try photoRepo?.loadPhotoList().map({$0.compactMap({ $0.data})})
@@ -132,22 +105,7 @@ class PhotoListViewModel: PhotoListViewModelProtocol {
                 self.savePhotoDetails(data: $0)
             }
             
-        }else{
-            guard let data = loadPhotoDetails() else {
-                return
-            }
-            completion!(data)
         }
-    }
-    
-    func deletePhotoList() {
-        let photos = PhotoList(context: PersistenceService.context)
-        photoRepo?.deletePhotoList(photos: photos)
-    }
-    
-    func deletePhotoDetails() {
-        let photo = PhotoDetail(context: PersistenceService.context)
-        photoRepo?.deletePhotoDetails(photo: photo)
     }
 }
 

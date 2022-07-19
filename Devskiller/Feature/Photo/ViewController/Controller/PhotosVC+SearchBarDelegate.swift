@@ -20,7 +20,6 @@ extension PhotoListViewController: UITextFieldDelegate {
         // 1
         photoViewModel.query = text
         ActivityIndicator.shared.start(view: textField)
-        photoViewModel.deletePhotoList()
         handleSearch(query: text)
         self.collectionView.layoutIfNeeded()
         self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
