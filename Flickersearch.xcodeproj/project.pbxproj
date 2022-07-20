@@ -110,7 +110,7 @@
 		318FB6DC280B3A5700DD8687 /* BaseStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStorage.swift; sourceTree = "<group>"; };
 		318FB6E6280B65C700DD8687 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		318FB6F0280C429500DD8687 /* SearchPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoViewModel.swift; sourceTree = "<group>"; };
-		48D69BC32514ECC700DD96AA /* Devskiller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Devskiller.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		48D69BC32514ECC700DD96AA /* Flickersearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickersearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D69BC62514ECC700DD96AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48D69BC82514ECC700DD96AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		48D69BCA2514ECC700DD96AA /* PhotoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
@@ -118,10 +118,10 @@
 		48D69BD22514ECC800DD96AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48D69BD52514ECC800DD96AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48D69BD72514ECC800DD96AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48D69BDC2514ECC800DD96AA /* DevskillerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevskillerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48D69BDC2514ECC800DD96AA /* FlickersearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickersearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D69BE02514ECC800DD96AA /* DevskillerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevskillerTests.swift; sourceTree = "<group>"; };
 		48D69BE22514ECC800DD96AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48D69BE72514ECC800DD96AA /* DevskillerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevskillerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48D69BE72514ECC800DD96AA /* FlickersearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickersearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D69BED2514ECC800DD96AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -340,9 +340,9 @@
 		48D69BBA2514ECC700DD96AA = {
 			isa = PBXGroup;
 			children = (
-				48D69BC52514ECC700DD96AA /* Devskiller */,
-				48D69BDF2514ECC800DD96AA /* DevskillerTests */,
-				48D69BEA2514ECC800DD96AA /* DevskillerUITests */,
+				48D69BC52514ECC700DD96AA /* Flickersearch */,
+				48D69BDF2514ECC800DD96AA /* FlickersearchTests */,
+				48D69BEA2514ECC800DD96AA /* FlickersearchUITests */,
 				48D69BC42514ECC700DD96AA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -350,14 +350,14 @@
 		48D69BC42514ECC700DD96AA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				48D69BC32514ECC700DD96AA /* Devskiller.app */,
-				48D69BDC2514ECC800DD96AA /* DevskillerTests.xctest */,
-				48D69BE72514ECC800DD96AA /* DevskillerUITests.xctest */,
+				48D69BC32514ECC700DD96AA /* Flickersearch.app */,
+				48D69BDC2514ECC800DD96AA /* FlickersearchTests.xctest */,
+				48D69BE72514ECC800DD96AA /* FlickersearchUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		48D69BC52514ECC700DD96AA /* Devskiller */ = {
+		48D69BC52514ECC700DD96AA /* Flickersearch */ = {
 			isa = PBXGroup;
 			children = (
 				312C91862811CC0800C2CAF0 /* Helper */,
@@ -378,33 +378,33 @@
 				48D69BD72514ECC800DD96AA /* Info.plist */,
 				48D69BCF2514ECC700DD96AA /* Devskiller.xcdatamodeld */,
 			);
-			path = Devskiller;
+			path = Flickersearch;
 			sourceTree = "<group>";
 		};
-		48D69BDF2514ECC800DD96AA /* DevskillerTests */ = {
+		48D69BDF2514ECC800DD96AA /* FlickersearchTests */ = {
 			isa = PBXGroup;
 			children = (
 				48D69BE02514ECC800DD96AA /* DevskillerTests.swift */,
 				48D69BE22514ECC800DD96AA /* Info.plist */,
 			);
-			path = DevskillerTests;
+			path = FlickersearchTests;
 			sourceTree = "<group>";
 		};
-		48D69BEA2514ECC800DD96AA /* DevskillerUITests */ = {
+		48D69BEA2514ECC800DD96AA /* FlickersearchUITests */ = {
 			isa = PBXGroup;
 			children = (
 				48D69BED2514ECC800DD96AA /* Info.plist */,
 				311550BC2887287100AF1AD6 /* PhotoListUITest.swift */,
 			);
-			path = DevskillerUITests;
+			path = FlickersearchUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		48D69BC22514ECC700DD96AA /* Devskiller */ = {
+		48D69BC22514ECC700DD96AA /* Flickersearch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48D69BF02514ECC800DD96AA /* Build configuration list for PBXNativeTarget "Devskiller" */;
+			buildConfigurationList = 48D69BF02514ECC800DD96AA /* Build configuration list for PBXNativeTarget "Flickersearch" */;
 			buildPhases = (
 				48D69BBF2514ECC700DD96AA /* Sources */,
 				48D69BC02514ECC700DD96AA /* Frameworks */,
@@ -414,14 +414,14 @@
 			);
 			dependencies = (
 			);
-			name = Devskiller;
+			name = Flickersearch;
 			productName = Devskiller;
-			productReference = 48D69BC32514ECC700DD96AA /* Devskiller.app */;
+			productReference = 48D69BC32514ECC700DD96AA /* Flickersearch.app */;
 			productType = "com.apple.product-type.application";
 		};
-		48D69BDB2514ECC800DD96AA /* DevskillerTests */ = {
+		48D69BDB2514ECC800DD96AA /* FlickersearchTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48D69BF32514ECC800DD96AA /* Build configuration list for PBXNativeTarget "DevskillerTests" */;
+			buildConfigurationList = 48D69BF32514ECC800DD96AA /* Build configuration list for PBXNativeTarget "FlickersearchTests" */;
 			buildPhases = (
 				48D69BD82514ECC800DD96AA /* Sources */,
 				48D69BD92514ECC800DD96AA /* Frameworks */,
@@ -432,14 +432,14 @@
 			dependencies = (
 				48D69BDE2514ECC800DD96AA /* PBXTargetDependency */,
 			);
-			name = DevskillerTests;
+			name = FlickersearchTests;
 			productName = DevskillerTests;
-			productReference = 48D69BDC2514ECC800DD96AA /* DevskillerTests.xctest */;
+			productReference = 48D69BDC2514ECC800DD96AA /* FlickersearchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		48D69BE62514ECC800DD96AA /* DevskillerUITests */ = {
+		48D69BE62514ECC800DD96AA /* FlickersearchUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48D69BF62514ECC800DD96AA /* Build configuration list for PBXNativeTarget "DevskillerUITests" */;
+			buildConfigurationList = 48D69BF62514ECC800DD96AA /* Build configuration list for PBXNativeTarget "FlickersearchUITests" */;
 			buildPhases = (
 				48D69BE32514ECC800DD96AA /* Sources */,
 				48D69BE42514ECC800DD96AA /* Frameworks */,
@@ -450,9 +450,9 @@
 			dependencies = (
 				48D69BE92514ECC800DD96AA /* PBXTargetDependency */,
 			);
-			name = DevskillerUITests;
+			name = FlickersearchUITests;
 			productName = DevskillerUITests;
-			productReference = 48D69BE72514ECC800DD96AA /* DevskillerUITests.xctest */;
+			productReference = 48D69BE72514ECC800DD96AA /* FlickersearchUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -463,7 +463,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1330;
-				ORGANIZATIONNAME = Mindera;
+				ORGANIZATIONNAME = BabytoBody;
 				TargetAttributes = {
 					48D69BC22514ECC700DD96AA = {
 						CreatedOnToolsVersion = 11.5;
@@ -478,7 +478,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 48D69BBE2514ECC700DD96AA /* Build configuration list for PBXProject "Devskiller" */;
+			buildConfigurationList = 48D69BBE2514ECC700DD96AA /* Build configuration list for PBXProject "Flickersearch" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -491,9 +491,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				48D69BC22514ECC700DD96AA /* Devskiller */,
-				48D69BDB2514ECC800DD96AA /* DevskillerTests */,
-				48D69BE62514ECC800DD96AA /* DevskillerUITests */,
+				48D69BC22514ECC700DD96AA /* Flickersearch */,
+				48D69BDB2514ECC800DD96AA /* FlickersearchTests */,
+				48D69BE62514ECC800DD96AA /* FlickersearchUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -594,12 +594,12 @@
 /* Begin PBXTargetDependency section */
 		48D69BDE2514ECC800DD96AA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 48D69BC22514ECC700DD96AA /* Devskiller */;
+			target = 48D69BC22514ECC700DD96AA /* Flickersearch */;
 			targetProxy = 48D69BDD2514ECC800DD96AA /* PBXContainerItemProxy */;
 		};
 		48D69BE92514ECC800DD96AA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 48D69BC22514ECC700DD96AA /* Devskiller */;
+			target = 48D69BC22514ECC700DD96AA /* Flickersearch */;
 			targetProxy = 48D69BE82514ECC800DD96AA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -738,12 +738,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3K5BT8EBBM;
-				INFOPLIST_FILE = Devskiller/Info.plist;
+				INFOPLIST_FILE = Flickersearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mindera.Devskiller;
+				PRODUCT_BUNDLE_IDENTIFIER = baby2body.Flickerserch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -756,12 +756,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3K5BT8EBBM;
-				INFOPLIST_FILE = Devskiller/Info.plist;
+				INFOPLIST_FILE = Flickersearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mindera.Devskiller;
+				PRODUCT_BUNDLE_IDENTIFIER = baby2body.Flickerserch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -786,7 +786,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Devskiller.app/Devskiller";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flickersearch.app/Flickersearch";
 			};
 			name = Debug;
 		};
@@ -808,7 +808,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Devskiller.app/Devskiller";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flickersearch.app/Flickersearch";
 			};
 			name = Release;
 		};
@@ -855,7 +855,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		48D69BBE2514ECC700DD96AA /* Build configuration list for PBXProject "Devskiller" */ = {
+		48D69BBE2514ECC700DD96AA /* Build configuration list for PBXProject "Flickersearch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48D69BEE2514ECC800DD96AA /* Debug */,
@@ -864,7 +864,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48D69BF02514ECC800DD96AA /* Build configuration list for PBXNativeTarget "Devskiller" */ = {
+		48D69BF02514ECC800DD96AA /* Build configuration list for PBXNativeTarget "Flickersearch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48D69BF12514ECC800DD96AA /* Debug */,
@@ -873,7 +873,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48D69BF32514ECC800DD96AA /* Build configuration list for PBXNativeTarget "DevskillerTests" */ = {
+		48D69BF32514ECC800DD96AA /* Build configuration list for PBXNativeTarget "FlickersearchTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48D69BF42514ECC800DD96AA /* Debug */,
@@ -882,7 +882,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48D69BF62514ECC800DD96AA /* Build configuration list for PBXNativeTarget "DevskillerUITests" */ = {
+		48D69BF62514ECC800DD96AA /* Build configuration list for PBXNativeTarget "FlickersearchUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48D69BF72514ECC800DD96AA /* Debug */,
