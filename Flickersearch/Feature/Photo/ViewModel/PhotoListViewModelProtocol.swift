@@ -17,4 +17,5 @@ protocol PhotoListViewModelProtocol {
     func loadPhotoList()  -> [Data]?
     func presentImage(_ indexPath: IndexPath,
                         completion: ((Data) -> Void)?)
+    func deletePhotoList()
 }

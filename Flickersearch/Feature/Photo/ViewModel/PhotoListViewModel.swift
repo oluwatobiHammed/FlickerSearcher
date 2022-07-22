@@ -107,6 +107,13 @@ class PhotoListViewModel: PhotoListViewModelProtocol {
             
         }
     }
+    
+    func deletePhotoList() {
+        let photos = PhotoList(context: PersistenceService.context)
+        photoRepo?.deletePhotoList(photos: photos)
+    }
+    
+
 }
 
 
